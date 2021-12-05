@@ -1,0 +1,49 @@
+<table class="table table-bordered" >
+    <thead>
+        <tr>
+            <th colspan="2" class="text-center">
+                Shopping Cart
+            </th>
+        </tr>
+        <tr>
+            <th>Product</th>
+            <!-- <th>Quantity</th> -->
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if request.session.cart.items %}
+            {% for key,value in request.session.cart.items %}
+
+                <tr class="text-center">
+                    <td>({{value.quantity}})  {{value.name}}</td>
+                    <td>
+                        <a href="{% url 'cart:add' value.product_id %}" class="btn  btn-success mt-auto">+</a>
+                        <a href="{% url 'cart:subtract' value.product_id %}" class="btn  btn-success mt-auto">-</a>
+                        <br>
+                        ${{value.price}}0
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+        {% else %}
+            <tr>
+                <td colspan="2">
+                    <div class='alert alert-danger text-center'>
+                        Without Products
+                    </div>
+
+                </td>
+            </tr>
+        {% endif %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2">
+                <b>Total:</b> ${{total_cart}}0
+            </td>
+        </tr>
+    </tfoot>
+</table>

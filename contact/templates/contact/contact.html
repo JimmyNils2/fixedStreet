@@ -1,0 +1,23 @@
+{% extends 'FixedStreetApp/father.html' %} 
+{% load static %}
+
+{% block title %}
+  <title>Contact</title>
+{% endblock %}
+{% block body %}
+
+  <div class="intro-text left-0 text-center bg-faded p-5 rounded" style="width: 550px; margin: 0 auto; margin-top: 20px; margin-bottom: 20px; align-items: center;">
+    {% if "valido" in request.GET %}
+      <h4>Your message was submitted successfully.</h4>
+    {% endif %}
+    <form action="" method="POST">
+      {% csrf_token %}
+      <table>
+        {{contact_form.as_table}}
+      </table>
+      <input type="submit" value="Submit" style="margin-top: 20px; background-color: rgba(255, 255, 255, 0.7); border-radius: 10px; width: 150px;">
+    </form>
+  </div>
+  
+  {{request.POST}}
+{% endblock %}

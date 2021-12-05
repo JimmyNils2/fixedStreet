@@ -1,0 +1,42 @@
+{% extends 'FixedStreetApp/father.html' %} 
+{% load static %}
+
+{% block title %}
+  <title>Store</title>
+{% endblock %}
+
+{% block body %}
+  <section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+      <div class="card" style="width: 240px; float: right;">
+        {% include 'cart/widget.html' %}
+      </div>
+      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        {% for product in products %}
+          <div class="col mb-5 md-5">
+            <div class="card" style="width: 200px;">
+                <!-- Product image-->
+                <img class="card-img-top" src="{{product.image.url}}"   alt="{{product.name}}" width="10px" height="200px"/>
+                <!-- Product details-->
+                <div class="card-body p-7">
+                    <div class="text-center">
+                        <!-- Product name-->
+                        <h5 class="card title">{{product.name}}</h5>
+                        <!-- Product price-->
+                        ${{product.price}}0
+                    </div>
+                </div>
+                <!-- Product actions-->
+                <div class="card-footer p-4 pt-0 border-top-0   bg-transparent">
+                    <div class="text-center">
+                      <a class="btn  btn-success-dark mt-auto" href="#" style="margin-bottom: 10px;">View details</a>
+                      <a class="btn  btn-success mt-auto" href="{% url 'cart:add' product.id %}">Add</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>  
+{% endblock %}
